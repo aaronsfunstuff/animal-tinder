@@ -1,3 +1,5 @@
+// script.js
+
 const animals = [
     {
         name: "Buddy",
@@ -22,6 +24,7 @@ const animalImage = document.getElementById('animal-image');
 const animalName = document.getElementById('animal-name');
 const animalDescription = document.getElementById('animal-description');
 const likedAnimalsContainer = document.getElementById('liked-animals');
+const mainLikedAnimalsContainer = document.getElementById('main-liked-animals');
 
 function loadAnimalProfile(index) {
     const animal = animals[index];
@@ -30,8 +33,13 @@ function loadAnimalProfile(index) {
     animalDescription.textContent = animal.description;
 }
 
-document.getElementById('like').addEventListener('click', () => swipeCard('right'));
-document.getElementById('dislike').addEventListener('click', () => swipeCard('left'));
+document.getElementById('like').addEventListener('click', () => {
+    swipeCard('right');
+});
+
+document.getElementById('dislike').addEventListener('click', () => {
+    swipeCard('left');
+});
 
 function swipeCard(direction) {
     const card = document.querySelector('.card');
@@ -58,7 +66,12 @@ function swipeCard(direction) {
             <p>${animal.name}</p>
         `;
         likedAnimalsContainer.appendChild(likedAnimalElement);
+
+        // Also add to the main page's liked animals section
+        const mainLikedAnimalElement = likedAnimalElement.cloneNode(true);
+        mainLikedAnimalsContainer.appendChild(mainLikedAnimalElement);
     }
 }
 
+// Load initial animal profile
 loadAnimalProfile(currentIndex);
