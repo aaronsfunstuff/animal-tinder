@@ -21,6 +21,7 @@ let currentIndex = 0;
 const animalImage = document.getElementById('animal-image');
 const animalName = document.getElementById('animal-name');
 const animalDescription = document.getElementById('animal-description');
+const likedAnimalsContainer = document.getElementById('liked-animals');
 
 function loadAnimalProfile(index) {
     const animal = animals[index];
@@ -29,20 +30,35 @@ function loadAnimalProfile(index) {
     animalDescription.textContent = animal.description;
 }
 
-document.getElementById('like').addEventListener('click', () => {
-    currentIndex++;
-    if (currentIndex >= animals.length) {
-        currentIndex = 0;
-    }
-    loadAnimalProfile(currentIndex);
-});
+document.getElementById('like').addEventListener('click', () => swipeCard('right'));
+document.getElementById('dislike').addEventListener('click', () => swipeCard('left'));
 
-document.getElementById('dislike').addEventListener('click', () => {
-    currentIndex++;
-    if (currentIndex >= animals.length) {
-        currentIndex = 0;
+function swipeCard(direction) {
+    const card = document.querySelector('.card');
+    card.style.transform = direction === 'left' ? 'translateX(-100%)' : 'translateX(100%)';
+    card.style.opacity = 0;
+    setTimeout(() => {
+        currentIndex++;
+        if (currentIndex >= animals.length) {
+            currentIndex = 0;
+        }
+        loadAnimalProfile(currentIndex);
+        card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        card.style.transform = 'translateX(0)';
+        card.style.opacity = 1;
+    }, 400);
+
+    // Handle liked animal
+    if (direction === 'right') {
+        const animal = animals[currentIndex];
+        const likedAnimalElement = document.createElement('div');
+        likedAnimalElement.classList.add('liked-animal');
+        likedAnimalElement.innerHTML = `
+            <img src="${animal.image}" alt="${animal.name}">
+            <p>${animal.name}</p>
+        `;
+        likedAnimalsContainer.appendChild(likedAnimalElement);
     }
-    loadAnimalProfile(currentIndex);
-});
+}
 
 loadAnimalProfile(currentIndex);
