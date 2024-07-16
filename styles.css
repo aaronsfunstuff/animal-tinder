@@ -17,6 +17,28 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffa07a;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -32,6 +54,7 @@ main {
     text-align: center;
     background-color: #fff0f5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .card img {
@@ -59,4 +82,35 @@ main {
 
 .button:hover {
     background-color: #ffa07a;
+}
+
+#liked {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#liked h2 {
+    color: #333;
+}
+
+#liked-animals {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.liked-animal {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+    transition: transform 0.4s ease;
+}
+
+.liked-animal img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
